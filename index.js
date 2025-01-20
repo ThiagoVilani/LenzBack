@@ -34,9 +34,6 @@ app.use(bodyParser.json());
 // const productoRoutes = require("./routes/producto.routes.js");
 
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log("App started");
-  });
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -44,11 +41,16 @@ const transporter = nodemailer.createTransport({
       user: 'thiagovilani19@gmail.com',
       pass: 'vcai wvpa jfov mrla'
     }
-});
-
-app.post('/enviar-email', (req, res) => {
-    const { nombre, numeroTelefono, ubicacion, mensaje } = req.body;
+  });
   
+
+  app.get("/e",(req,res) => {
+    res.send("funcion");
+  })
+
+  app.post('/enviar-email', (req, res) => {
+    const { nombre, numeroTelefono, ubicacion, mensaje } = req.body;
+    
     const mailOptions = {
       from: 'thiagovilani19@gmail.com',
       to: 'lenzelectricidadinmuebles@gmail.com',
@@ -66,3 +68,7 @@ app.post('/enviar-email', (req, res) => {
       }
     });
   });
+
+    app.listen(process.env.PORT || 3000, () => {
+        console.log("App started");
+      });
