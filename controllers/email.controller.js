@@ -1,5 +1,17 @@
-//Hay que exportar la funcion para poder usarla en el index
-function TomarYEnviarInfo(nombre,numeroTelefono,ubicacion,mensaje){
+const nodemailer = require('nodemailer');
+
+async function CrearTransport(){
+    return nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'thiagovilani19@gmail.com',
+          pass: 'vcai wvpa jfov mrla'
+        }
+    });
+}
+
+
+async function TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje){
     const mailOptions = {
         from: 'thiagovilani19@gmail.com', //Habria que crear un mail especial para enviar estas cosas
         to: 'lenzelectricidadinmuebles@gmail.com',
@@ -19,3 +31,4 @@ function TomarYEnviarInfo(nombre,numeroTelefono,ubicacion,mensaje){
 }
 
 module.exports.TomarYEnviarInfo = TomarYEnviarInfo;
+module.exports.CrearTransport = CrearTransport;
