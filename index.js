@@ -1,4 +1,4 @@
-const email = require("./controllers/email.controller.js");
+const EC = require("./controllers/email.controller.js");
 const express = require("express");
 require("dotenv").config(); // Cargar variables de entorno al inicio
 const app = express();
@@ -11,7 +11,10 @@ const bodyParser = require("body-parser");
 app.use(express.static('public'));
 
 // Deshabilitar cors
-app.use(FC.DeshabilitarCors());
+app.use((req,res,next)=>{
+  FC.DeshabilitarCors(req,res,next);
+});
+// app.use(FC.DeshabilitarCors(req,res,next));
 
 //Variables de entorno
 process.loadEnvFile();
@@ -20,12 +23,12 @@ process.loadEnvFile();
 app.use(bodyParser.json());
 
 //Creo transporter para enviar los emails
-const transporter = await email.CrearTransport();
+const transporter = EC.CrearTransport();
   
 //  Ruta
 app.post('/enviar-email', (req, res) => {
   const [nombre,numeroTelefono,ubicacion,mensaje] = req.body;
-  email.TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje);
+  EC.TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje);
 });
 
 

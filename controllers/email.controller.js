@@ -30,5 +30,6 @@ async function TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mens
     });
 }
 
+
 module.exports.TomarYEnviarInfo = TomarYEnviarInfo;
 module.exports.CrearTransport = CrearTransport;
