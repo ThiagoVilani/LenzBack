@@ -14,7 +14,6 @@ app.use(express.static('public'));
 app.use((req,res,next)=>{
   FC.DeshabilitarCors(req,res,next);
 });
-// app.use(FC.DeshabilitarCors(req,res,next));
 
 //Variables de entorno
 process.loadEnvFile();
@@ -24,10 +23,10 @@ app.use(bodyParser.json());
 
 //Creo transporter para enviar los emails
 const transporter = EC.CrearTransport();
-  
+
 //  Ruta
 app.post('/enviar-email', (req, res) => {
-  const [nombre,numeroTelefono,ubicacion,mensaje] = req.body;
+  const {nombre,numeroTelefono,ubicacion,mensaje} = req.body;
   EC.TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje);
 });
 
