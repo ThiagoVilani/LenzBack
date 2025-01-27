@@ -30,6 +30,25 @@ async function TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mens
     });
 }
 
+async function EnviarVisita(transporter){
+    const mailOptions = {
+        from: 'thiagovilani19@gmail.com', //Habria que crear un mail especial para enviar estas cosas
+        to: 'lenzelectricidadinmuebles@gmail.com',
+        subject: 'Visita a la pagina',
+        text: `Nueva visita a la pagina`
+    };
+      
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            res.status(500).send('Error al enviar el correo');
+        }else{
+            console.log('Correo enviado: ' + info.response);
+            res.status(200).send('Correo enviado con éxito');
+        }
+    });
+}
 
 module.exports.TomarYEnviarInfo = TomarYEnviarInfo;
 module.exports.CrearTransport = CrearTransport;
+module.exports.EnviarVisita = EnviarVisita;

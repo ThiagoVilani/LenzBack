@@ -30,6 +30,9 @@ app.post('/enviar-email', (req, res) => {
   EC.TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje);
 });
 
+app.post("/visita-email",(req,res)=>{
+  EC.EnviarVisita(transporter);
+})
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("App started");
