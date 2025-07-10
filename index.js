@@ -1,11 +1,10 @@
-const EC = require("./controllers/email.controller.js");
+const EC = require("./controllers/email.controller.js"); //Funciones para enviar los emails
 const express = require("express");
 require("dotenv").config(); // Cargar variables de entorno al inicio
 const app = express();
-const FC = require("./controllers/funcionesConfig.js");
+const FC = require("./controllers/funcionesConfig.js"); // Funciones varias
 const bodyParser = require("body-parser");
-//|-|-|-|-||-|-|-|-||-|-|-|-||-|-|-|-||-|-|-|-||-|-|-|-|
-
+//-------------------------------------------------------------
 
 //Configurar los archivos estaticos
 app.use(express.static('public'));
@@ -24,7 +23,7 @@ app.use(bodyParser.json());
 //Creo transporter para enviar los emails
 const transporter = EC.CrearTransport();
 
-//  Ruta
+//  Ruta--------
 app.post('/enviar-email', (req, res) => {
   const {nombre,numeroTelefono,ubicacion,mensaje} = req.body;
   EC.TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje);
@@ -33,6 +32,8 @@ app.post('/enviar-email', (req, res) => {
 app.post("/visita-email",(req,res)=>{
   EC.EnviarVisita(transporter);
 })
+//--------------
+
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("App started");
