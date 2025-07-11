@@ -24,9 +24,14 @@ app.use(bodyParser.json());
 const transporter = EC.CrearTransport();
 
 //  Ruta--------
-app.post('/enviar-email', (req, res) => {
+app.post('/enviar-email', async (req, res) => {
   const {nombre,numeroTelefono,ubicacion,mensaje} = req.body;
-  EC.TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje);
+  console.log(nombre,numeroTelefono);
+  try{
+    await EC.TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje,res);
+  }catch{
+
+  }
 });
 
 app.post("/visita-email",(req,res)=>{

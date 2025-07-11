@@ -4,15 +4,16 @@ function CrearTransport(){
     return nodemailer.createTransport({
         host: 'smtp-relay.brevo.com',
         port: 587,
+        secure: false, // IMPORTANTE: false para puerto 587
         auth: {
-          user: 'lenzelectricidadinmuebles@gmail.com', // el que usaste para registrarte
-          pass: 'qsFfSgkIUrLJ43Pb'  // la clave que generaste
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS
         }
     });
 }
 
 
-async function TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje){
+async function TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje,res){
     const mailOptions = {
         from: 'lenzelectricidadinmuebles@gmail.com', //Habria que crear un mail especial para enviar estas cosas
         to: 'lenzelectricidadinmuebles@gmail.com',
