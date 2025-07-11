@@ -2,10 +2,11 @@ const nodemailer = require('nodemailer');
 
 function CrearTransport(){
     return nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp-relay.brevo.com',
+        port: 587,
         auth: {
-          user: 'thiagovilani19@gmail.com',
-          pass: 'vcai wvpa jfov mrla'
+          user: 'lenzelectricidadinmuebles@gmail.com', // el que usaste para registrarte
+          pass: 'qsFfSgkIUrLJ43Pb'  // la clave que generaste
         }
     });
 }
@@ -13,7 +14,7 @@ function CrearTransport(){
 
 async function TomarYEnviarInfo(transporter,nombre,numeroTelefono,ubicacion,mensaje){
     const mailOptions = {
-        from: 'thiagovilani19@gmail.com', //Habria que crear un mail especial para enviar estas cosas
+        from: 'lenzelectricidadinmuebles@gmail.com', //Habria que crear un mail especial para enviar estas cosas
         to: 'lenzelectricidadinmuebles@gmail.com',
         subject: 'Nuevo mensaje del formulario',
         text: `Nombre: ${nombre}\nNumero de telefono: ${numeroTelefono}\nUbicacion: ${ubicacion}\nMensaje: ${mensaje}`
